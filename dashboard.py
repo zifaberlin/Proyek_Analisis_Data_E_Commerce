@@ -29,8 +29,11 @@ def load_data():
         "order_delivered_customer_date",
         "order_estimated_delivery_date"
     ] 
-for col in date_cols:
-    orders_df[col]=pd.to_datetime(orders_df[col], errors="coerce") 
+    for col in date_cols:
+        orders_df[col] = pd.to_datetime(
+            orders_df[col],
+            errors="coerce"
+        )  
 
     # filter tanggal
     orders_df = orders_df[
