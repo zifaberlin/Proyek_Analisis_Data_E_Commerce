@@ -63,8 +63,6 @@ for col in date_cols:
     orders_df["order_date"] = orders_df["order_purchase_timestamp"].dt.date
     orders_rfm_df["order_date"] = orders_rfm_df["order_purchase_timestamp"].dt.date
 
-    return orders_df, reviews_df, payments_df, orders_rfm_df
-
 
 orders_df, reviews_df, payments_df, orders_rfm_df = load_data()
 
