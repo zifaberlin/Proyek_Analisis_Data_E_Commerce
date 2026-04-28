@@ -29,9 +29,43 @@ Insight Utama
 - `order_reviews_dataset.csv`
 - `order_payments_dataset.csv`
 
- Setup Environment
+  Setup Environment
 
-Install dependencies:
+````markdown
+## Setup Environment
+
+1. Buat virtual environment:
+```bash
+python -m venv venv
+````
+
+2. Aktifkan virtual environment:
+
+Windows:
+
+```bash
+venv\Scripts\activate
+```
+
+Mac/Linux:
+
+```bash
+source venv/bin/activate
+```
+
+3. Install dependencies:
 
 ```bash
 pip install -r requirements.txt
+```
+
+## Menjalankan Dashboard
+
+```bash
+streamlit run dashboard.py
+```
+
+
+
+
+
