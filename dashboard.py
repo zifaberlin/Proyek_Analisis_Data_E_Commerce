@@ -32,7 +32,6 @@ date_cols = [
 for col in date_cols:
     orders_df[col]=pd.to_datetime(orders_df[col], errors="coerce")
 
-
     # filter tanggal
     orders_df = orders_df[
         (orders_df["order_purchase_timestamp"] >= "2016-09-01") &
