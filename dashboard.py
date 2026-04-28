@@ -21,8 +21,8 @@ def load_data():
     reviews_df = pd.read_csv(BASE_DIR / "order_reviews_dataset.csv")
     payments_df = pd.read_csv(BASE_DIR / "order_payments_dataset.csv")
 
-# convert datetime
-date_cols = [
+    # convert datetime
+    date_cols = [
         "order_purchase_timestamp",
         "order_approved_at",
         "order_delivered_carrier_date",
@@ -30,7 +30,7 @@ date_cols = [
         "order_estimated_delivery_date"
     ] 
 for col in date_cols:
-    orders_df[col]=pd.to_datetime(orders_df[col], errors="coerce")
+    orders_df[col]=pd.to_datetime(orders_df[col], errors="coerce") 
 
     # filter tanggal
     orders_df = orders_df[
@@ -38,8 +38,9 @@ for col in date_cols:
         (orders_df["order_purchase_timestamp"] <= "2018-08-31")
     ]
 
-    orders_rfm_df = orders_df.copy()
+    orders_rfm_df = orders_df.copy() 
 
+    
     orders_df = orders_df.dropna(subset=[
         "order_delivered_customer_date",
         "order_estimated_delivery_date"
@@ -53,6 +54,7 @@ for col in date_cols:
         "Late"
     )
 
+
     # filter review score valid
     reviews_df = reviews_df[
         reviews_df["review_score"].between(1, 5)
@@ -61,6 +63,7 @@ for col in date_cols:
     # create date column
     orders_df["order_date"] = orders_df["order_purchase_timestamp"].dt.date
     orders_rfm_df["order_date"] = orders_rfm_df["order_purchase_timestamp"].dt.date
+    return orders_df, reviews_df, payments_df, orders_rfm_df
 
 
 orders_df, reviews_df, payments_df, orders_rfm_df = load_data()
