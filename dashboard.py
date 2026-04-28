@@ -4,6 +4,7 @@ import numpy as np
 from pathlib import Path
 import matplotlib.pyplot as plt
 import seaborn as sns
+import matplotlib.ticker as ticker
 
 st.set_page_config(
     page_title="Dashboard Analisis E-Commerce",
@@ -138,7 +139,13 @@ st.pyplot(fig)
 
 st.header("2️⃣ Metode Pembayaran Paling Dominan")
 
-payment_summary = payments_df.groupby("payment_type").agg({
+filtered_payments = pd.merge(
+    filtered_orders[["order_id"]]'
+    payments_df,
+    on="order_id"'
+    how="inner"
+) 
+payment_summary = filtered_payment.groupby("payment_type").agg({
     "order_id": "count",
     "payment_value": "sum"
 }).reset_index()
@@ -154,13 +161,17 @@ payment_summary = payment_summary.sort_values(
     ascending=False
 )
 
-fig, ax = plt.subplots(figsize=(10, 5))
+fig, ax = plt.subplots(figsize=(8, 4))
 sns.barplot(data=payment_summary, x="payment_type", y="total_transaction", ax=ax)
 plt.xticks(rotation=30)
-ax.set_title("Jumlah Transaksi per Payment Type")
+ax.set_title("Jumlah Transaksi per Payment Type") 
+ax.set_ylabel("Total Revenue (Juta)")
+ax.yaxis.set_major_formatter(
+    ticker.FuncFormatter(lambda x, pos: f"{x/1_000_000:.1f}M")
+)
 st.pyplot(fig)
 
-fig, ax = plt.subplots(figsize=(10, 5))
+fig, ax = plt.subplots(figsize=(8, 4))
 sns.barplot(data=payment_summary, x="payment_type", y="total_revenue", ax=ax)
 plt.xticks(rotation=30)
 ax.set_title("Total Revenue per Payment Type")
