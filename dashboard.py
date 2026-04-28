@@ -28,12 +28,10 @@ def load_data():
         "order_delivered_carrier_date",
         "order_delivered_customer_date",
         "order_estimated_delivery_date"
-    ] 
+    ]
+
     for col in date_cols:
-        orders_df[col] = pd.to_datetime(
-            orders_df[col],
-            errors="coerce"
-        )  
+        orders_df[col] = pd.to_datetime(orders_df[col], errors="coerce")
 
     # filter tanggal
     orders_df = orders_df[
@@ -41,9 +39,8 @@ def load_data():
         (orders_df["order_purchase_timestamp"] <= "2018-08-31")
     ]
 
-    orders_rfm_df = orders_df.copy() 
+    orders_rfm_df = orders_df.copy()
 
-    
     orders_df = orders_df.dropna(subset=[
         "order_delivered_customer_date",
         "order_estimated_delivery_date"
@@ -57,7 +54,6 @@ def load_data():
         "Late"
     )
 
-
     # filter review score valid
     reviews_df = reviews_df[
         reviews_df["review_score"].between(1, 5)
@@ -66,6 +62,7 @@ def load_data():
     # create date column
     orders_df["order_date"] = orders_df["order_purchase_timestamp"].dt.date
     orders_rfm_df["order_date"] = orders_rfm_df["order_purchase_timestamp"].dt.date
+
     return orders_df, reviews_df, payments_df, orders_rfm_df
 
 
@@ -238,5 +235,3 @@ st.markdown("""
 3. Berikan reward untuk Best Customer.
 4. Reaktivasi Lost Customer.
 """)
-
-
