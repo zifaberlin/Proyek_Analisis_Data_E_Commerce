@@ -142,7 +142,7 @@ st.header("2️⃣ Metode Pembayaran Paling Dominan")
 filtered_payments = pd.merge(
     filtered_orders[["order_id"]]
     payments_df,
-    on="order_id"'
+    on="order_id",
     how="inner"
 ) 
 payment_summary = filtered_payment.groupby("payment_type").agg({
