@@ -21,8 +21,8 @@ def load_data():
     reviews_df = pd.read_csv(BASE_DIR / "order_reviews_dataset.csv")
     payments_df = pd.read_csv(BASE_DIR / "order_payments_dataset.csv")
 
-    # convert datetime
-    date_cols = [
+# convert datetime
+date_cols = [
         "order_purchase_timestamp",
         "order_approved_at",
         "order_delivered_carrier_date",
