@@ -32,8 +32,9 @@ def load_data():
 
     for col in date_cols:
         orders_df[col] = pd.to_datetime(orders_df[col], errors="coerce")
+    orders_df["order_date"] = orders_df["order_purchase_timestamp"].dt.date
 
-    return orders_df, reviews_df, payments_df, orders_df.copy()
+
     # filter tanggal
     orders_df = orders_df[
         (orders_df["order_purchase_timestamp"] >= "2016-09-01") &
@@ -41,6 +42,7 @@ def load_data():
     ]
 
     orders_rfm_df = orders_df.copy()
+
 
     orders_df = orders_df.dropna(subset=[
         "order_delivered_customer_date",
@@ -54,6 +56,7 @@ def load_data():
         "On Time",
         "Late"
     )
+
 
     # filter review score valid
     reviews_df = reviews_df[
