@@ -22,7 +22,6 @@ def load_data():
     reviews_df = pd.read_csv(BASE_DIR / "order_reviews_dataset.csv")
     payments_df = pd.read_csv(BASE_DIR / "order_payments_dataset.csv")
 
-    # convert datetime
     date_cols = [
         "order_purchase_timestamp",
         "order_approved_at",
@@ -34,6 +33,7 @@ def load_data():
     for col in date_cols:
         orders_df[col] = pd.to_datetime(orders_df[col], errors="coerce")
 
+    return orders_df, reviews_df, payments_df, orders_df.copy()
     # filter tanggal
     orders_df = orders_df[
         (orders_df["order_purchase_timestamp"] >= "2016-09-01") &
