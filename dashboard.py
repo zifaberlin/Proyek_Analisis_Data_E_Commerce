@@ -140,7 +140,7 @@ st.pyplot(fig)
 st.header("2️⃣ Metode Pembayaran Paling Dominan")
 
 filtered_payments = pd.merge(
-    filtered_orders[["order_id"]]
+    filtered_orders[["order_id"]],
     payments_df,
     on="order_id",
     how="inner"
